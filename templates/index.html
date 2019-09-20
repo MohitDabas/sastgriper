@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SASTGriper</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script>
+      function open_visual_code(PathNLineNum){
+          var FormFormat= new FormData();
+          FormFormat.append('PathNLineNum',PathNLineNum);
+          $.ajax({
+            url:"/open_viscode",
+            type:'POST',
+            data:FormFormat,
+            success:function (data){
+              console.log(data);
+            },
+            cache:false,
+            contentType:false,
+            processData:false
+
+        });
+      } 
+    
+    
+    </script>
+    <script>
+    $(function(){
+      $('#FolderMark').on('click',function(){
+        var FolderMark=$('input[name="FolderMarkInput"]').val();
+        console.log(FolderMark);
+        var FormFormat= new FormData(); //form data formating to be sent in ajax
+        FormFormat.append('FolderMarked',FolderMark);
+
+        $.ajax({
+           url:"/folder_mark",
+           type:'POST',
+           data:FormFormat,
+           success:function(data){
+              console.log(data);
+           },
+           cache:false,
+           contentType:false,
+           processData:false
+        });
+      })
+
+
+      $('#RegexButton').on('click',function(){
+        var Regexpr=$('input[name="Regex"]').val();
+        console.log(Regexpr);
+        HtmlForFileName=document.getElementsByClassName('box')[2];
+        HtmlForFileName.innerHTML='';
+        var FormFormat= new FormData();
+        FormFormat.append('Regexp',Regexpr);
+        $.ajax({
+           url:"/get_regex",
+           type:'POST',
+           data:FormFormat,
+           success:function(data){
+              console.log(data);
+              if(data=="Grep Command Was Insuccessful")
+              {
+                  alert("Grep Command Failed");
+              }
+              else{
+              for (i=0;i<data['data'].length;i++)
+              {
+                for(j=0;j<data['data'][i].length;j++)
+                {
+                  if (j==0)
+                  {
+                  console.log('FileName:'+data['data'][i][j]);
+                  HtmlForFileName=document.getElementsByClassName('box')[2];
+                  HtmlForFileName.innerHTML+= '<p class="subtitle is-5">'+data['data'][i][j]+'</p><a class="button"  id='+data['data'][i][j]+':'+data['data'][i][j+1]+' onClick="open_visual_code(this.id)">Open This File In Visual Studio</a><br/><br/>';
+                  
+                  }
+                  if(j==1)
+                  {
+                    console.log('Linenum:'+data['data'][i][j]);
+                    HtmlForFileName.innerHTML+='<table class="table">   <tr class="is-selected"><th>'+data['data'][i][j]+'.</th>';
+                  }
+                  if(j==2)
+                  {
+                    console.log('Code:'+data['data'][i][j]);
+                    HTMLForCode=document.getElementsByClassName('is-selected')[i];
+                    HTMLForCode.innerHTML+='<td>'+data['data'][i][j]+'</td>';
+                  }
+
+                }
+              }
+              }
+
+
+
+
+
+
+
+
+           },
+           cache:false,
+           contentType:false,
+           processData:false
+        });
+
+
+
+      })
+
+
+    });
+    
+    
+    
+    </script>
+    <style>
+        #lol {
+                 background: url("{{url_for('static',filename='logo_sast.png')}}") no-repeat center center;
+                 background-size: cover;
+                 width: 200px;
+                 height: 200px;
+                     }
+    </style>
+  </head>
+  <body>
+
+
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand">
+                  <a class="navbar-item" href="/">
+                    <img src="{{url_for('static',filename='logo_sast.png')}}" id="lol">
+                  </a>
+              
+                  <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                  </a>
+                </div>
+              
+                <div id="navbarBasicExample" class="navbar-menu">
+                  <div class="navbar-start">
+                    <a class="navbar-item" href="/">
+                      Home
+                    </a>
+              
+                    <a class="navbar-item" href="demo">
+                      Demo
+                    </a>
+
+                    <a class="navbar-item" href="uf">
+                            Upcoming Features
+                          </a>
+              
+                    
+                  </div>
+              
+                  <div class="navbar-end">
+                    <div class="navbar-item">
+                      <div class="buttons">
+                            <a class="button" href="https://github.com/MohitDabas/sastgriper">
+                                    <span class="icon">
+                                      <i class="fab fa-github"></i>
+                                    </span>
+                                    <span>GitHub</span>
+                                  </a>
+                       
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </nav>
+            
+
+            <div class="columns">
+               
+                    <div class="column is-three-fifths is-offset-one-fifth">
+                      <div class="box">
+                        <p class="title is-5">Mark Your Folder Here</p>
+                        <input class="input" type="text"  placeholder="Folder Path" name="FolderMarkInput"><br/><br/>
+                        <a class="button" id ="FolderMark">MarkIt!</a>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+
+                  <div class="columns">
+               
+                        <div class="column is-three-fifths is-offset-one-fifth">
+                          <div class="box">
+                            <p class="title is-5">Fire your Filters Here</p>
+                            <a class="button" id="RegexButton">Filter!</a><br/><br/>
+                            <input class="input" type="text" name="Regex" placeholder="Regex Filters">
+                            
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div class="columns">
+               
+                          <div class="column is-three-fifths is-offset-one-fifth">
+                            <div class="box">
+                              <p class="title is-5">Results</p>
+                            
+                            
+
+                             
+                              
+                            </div>
+                          </div>
+                        </div>
+      
+
+
+
+
+
+  </body>
+  </html>  

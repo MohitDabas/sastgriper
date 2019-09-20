@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SASTGriper</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    
+    <style>
+        #lol {
+                 background: url("{{url_for('static',filename='logo_sast.png')}}") no-repeat center center;
+                 background-size: cover;
+                 width: 200px;
+                 height: 200px;
+                     }
+    </style>
+  </head>
+  <body>
+
+
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand">
+                  <a class="navbar-item" href="/">
+                    <img src="{{url_for('static',filename='logo_sast.png')}}" id="lol">
+                  </a>
+              
+                  <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                  </a>
+                </div>
+              
+                <div id="navbarBasicExample" class="navbar-menu">
+                  <div class="navbar-start">
+                    <a class="navbar-item" href="/">
+                      Home
+                    </a>
+              
+                    <a class="navbar-item" href="/demo">
+                      Demo
+                    </a>
+
+                    <a class="navbar-item" href="/uf">
+                            Upcoming Features
+                          </a>
+              
+                    
+                  </div>
+              
+                  <div class="navbar-end">
+                    <div class="navbar-item">
+                      <div class="buttons">
+                            <a class="button" href="https://github.com/MohitDabas/sastgriper">
+                                    <span class="icon">
+                                      <i class="fab fa-github"></i>
+                                    </span>
+                                    <span>GitHub</span>
+                                  </a>
+                       
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </nav>
+            
+
+            <div class="columns">
+               
+                    <div class="column is-three-fifths is-offset-one-fifth">
+                      <div class="box">
+                        <p class="title is-5">For Demo and Working Please Visit This Url.</p>
+                        <a href="https://mohitdabas.wordpress.com/2019/09/20/sastgriper-finding-vulnerable-code-via-grep/">Writeup</a>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+
+
+      
+
+
+
+
+
+  </body>
+  </html>  
