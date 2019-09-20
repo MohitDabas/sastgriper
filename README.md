@@ -6,7 +6,7 @@ Before you start reading this I want to make sure the whole project is based upo
 grep -irnE  “regexp” ./pathtoFolder. 
 
 I haven’t done anything new or I m not even bragging. I m starting and posting this for feedbacks and features which are going to be added in the upcoming versions. Feel free to give any suggestions, feedback.
-I have only added a user interface where you can click a button which is mentioning your desired file and a visual studio code’s window will be opened and the cursor will directly point to that line number. You can add a breakpoint directly to it in visual studio code.
+I have only added a user interface where you can click a button which is mentioning your desired file and a visual studio code’s window will be opened and the cursor will directly point to that line number. You can add a breakpoint directly to the line number it in visual studio code.
 
 # Requirements
 
