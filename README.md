@@ -10,7 +10,7 @@ I have only added a user interface where you can click a button which is mention
 
 1.Flask Must be installed.
 
-2.Make sure you have visual studio code installed on your system and 'code' command for visual stdio code must be configured with your environment
+2.Make sure you have visual studio code installed on your system and 'code' command for visual studio code must be configured with your environment.
 
 # WriteUp
 
